@@ -1,0 +1,10 @@
+version: "3"
+services: 
+  name-change:
+    container_name: name-change
+    image: name-change
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+        - ./:/code

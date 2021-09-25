@@ -1,0 +1,12 @@
+mutation CreateCitizen ($citizenInput: CitizenInput!) {
+    createCitizen (citizenInput: $citizenInput){
+         id
+        email
+        currentName {
+            id
+            name
+            startDate
+            endDate
+        }
+    }
+}

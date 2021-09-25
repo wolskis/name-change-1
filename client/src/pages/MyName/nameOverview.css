@@ -1,0 +1,23 @@
+.names-control {
+    text-align: center;
+    border: 1px solid #2f15c2;
+    padding: 1rem;
+    margin: 2rem auto;
+    width: 30rem;
+    max-width: 80%;
+    justify-content: space-between;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+}
+
+.text h4{
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.text p {
+    font-size: 1rem;
+}

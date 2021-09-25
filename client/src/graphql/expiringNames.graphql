@@ -1,0 +1,8 @@
+query ExpiringNames {
+    expiringNames {
+        id
+        name
+        startDate
+        endDate
+    }
+}

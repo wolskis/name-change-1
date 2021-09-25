@@ -1,0 +1,9 @@
+query Citizens {
+  citizens {
+    id
+    currentName {
+      id
+      name
+    }
+  }
+}

@@ -1,0 +1,8 @@
+mutation CreateName ($nameInput: NameInput!) {
+    createName (nameInput: $nameInput){
+         id
+        name
+        startDate
+        endDate
+    }
+}

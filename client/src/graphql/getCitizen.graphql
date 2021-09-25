@@ -1,0 +1,16 @@
+query GetCitizen ($id: ID!){
+  getCitizen (id: $id) {
+    id
+    email
+    currentName {
+      name
+      id
+    }
+    pastNames {
+      id
+      name
+      endDate
+      startDate
+    }
+  }
+}

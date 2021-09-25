@@ -1,0 +1,40 @@
+.names__list-item {
+    margin: 1rem auto;
+    padding: 0.5rem;
+    border: 1px solid #2f15c2;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.names__list-item h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #2f15c2;
+}
+
+.names__list-item h2 {
+    margin: 0;
+    font-size: 1rem;
+    color: #8d4a14;
+}
+
+.names__list-item h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #adabb6;
+}
+
+.names__row-item {
+    display: flex;
+    flex-direction: column;
+}
+
+p {
+    font-size: 0.5rem;
+}
+
+.names__header {
+    flex-basis: 9em;
+}

@@ -25,15 +25,7 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
                 }
             })
 
-            if (response.data?.createCitizen) {
-                await login({
-                    variables: {
-                        email,
-                        password
-                    }
-                })
-            }
-            history.push('/')
+            history.push('/login')
         }}>
             <div className="form-control">
                 <input

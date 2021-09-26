@@ -105,7 +105,7 @@ export type CreateNameMutationVariables = Exact<{
 }>;
 
 
-export type CreateNameMutation = { __typename?: 'RootMutation', createName: { __typename?: 'Name', id: string, name: string, startDate?: Maybe<string>, endDate?: Maybe<string> } };
+export type CreateNameMutation = { __typename?: 'RootMutation', createName: { __typename?: 'Name', id: string, name: string, startDate?: Maybe<string>, endDate?: Maybe<string>, citizen: { __typename?: 'Citizen', id: string, email: string, currentName: { __typename?: 'Name', name: string, id: string }, pastNames: Array<{ __typename?: 'Name', id: string, name: string, endDate?: Maybe<string>, startDate?: Maybe<string> }> } } };
 
 export type ExpiringNamesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -185,6 +185,20 @@ export const CreateNameDocument = gql`
     name
     startDate
     endDate
+    citizen {
+      id
+      email
+      currentName {
+        name
+        id
+      }
+      pastNames {
+        id
+        name
+        endDate
+        startDate
+      }
+    }
   }
 }
     `;

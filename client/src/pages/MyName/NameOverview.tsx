@@ -2,10 +2,7 @@ import React from 'react'
 import './nameOverview.css'
 
 interface INameOverviewProps {
-    currentName?: {
-        id: string
-        name: string
-    },
+    currentName?: string,
     setCreateNameForm: (value: boolean) => void
     pastNamesLength?: number
 }
@@ -14,7 +11,7 @@ const NameOverview: React.FC<INameOverviewProps> = ({ currentName, setCreateName
     return (
         <div className="names-control">
             <div className="text">
-               <h4>Your current name is : {currentName?.name}</h4>  
+               <h4>Your current name is : {currentName}</h4>  
                { (pastNamesLength ?? 0) > 0 && <p>Following are your past names</p> }
             </div>
             <div className="form-actions sx">

@@ -45,10 +45,9 @@ const transformName = (name: typeof Name) => {
 const transformCitizen = (citizen: typeof Citizen) => {
   return {
     ...citizen._doc,
-    id: citizen.id,
+    id: citizen._id,
     currentName: singleName.bind(this, citizen.currentName),
     pastNames: names.bind(this, citizen._doc.pastNames),
-    password: null
   };
 };
 

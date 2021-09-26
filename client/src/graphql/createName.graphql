@@ -4,5 +4,19 @@ mutation CreateName ($nameInput: NameInput!) {
         name
         startDate
         endDate
+        citizen {
+            id
+            email
+            currentName {
+                name
+                id
+            }
+            pastNames {
+                id
+                name
+                endDate
+                startDate
+                }
+            }   
+        }
     }
-}

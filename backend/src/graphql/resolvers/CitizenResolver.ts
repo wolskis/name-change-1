@@ -89,23 +89,5 @@ module.exports = {
             console.log(err)
             return false
         }
-    },
-    deleteCitizens: async () => {
-        try {
-            await Citizen.deleteMany({})
-            return true
-        } catch (err) {
-            console.log(err)
-            return false
-        }
-    },
-    deleteNames: async () => {
-        try {
-            await Name.deleteMany({})
-            return true
-        } catch (err) {
-            console.log(err)
-            return false
-        }
-    },
+    }
 }

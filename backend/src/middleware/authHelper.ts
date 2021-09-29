@@ -1,7 +1,9 @@
+
 const { sign } = require('jsonwebtoken')
 const bcrypt = require('bcryptjs');
 const { verify } = require('jsonwebtoken')
 const Citizen = require('../models/CitizenModel')
+const { validateStringLength } = require('../helper/helper')
 
 export const createAccessToken = (citizen: typeof Citizen) => {
     return sign({ citizenId: citizen.id }, process.env.ACCESS_TOKEN_SECRET!, {
@@ -21,9 +23,16 @@ export const sendRefreshToken = (res, token: string) => {
 
 export const login =  async (req, res) => {
 
+    const isEmptyEmail = validateStringLength(req.body.email)
+
+    const isEmptyPassword = validateStringLength(req.body.password)
+
+    if (!isEmptyEmail || !isEmptyPassword) {
+        return res.send({ error: 'Email or Password cannot be empty' })
+    }
+
     const citizen = await Citizen.findOne({ email: req.body.email })
 
-    
     if (!citizen) {
         return res.send({ error: 'User does not exist' })
     }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom';
 import { useCreateCitizenMutation } from '../../generated/graphql';
+import { validateStringLength } from '../../helpers/helper';
 
 const Register: React.FC<RouteComponentProps> = ({ history }) => {
     const [email, setEmail] = useState('');
@@ -12,6 +13,15 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
     return (
         <form className="auth-form" onSubmit={async e => {
             e.preventDefault();
+
+            const isEmptyEmail = validateStringLength('Email', email)
+            const isEmptyPassword =  validateStringLength('Name', name)
+            const isEmptyName = validateStringLength('Password', password)
+
+            if (!isEmptyEmail || !isEmptyPassword || isEmptyName) {
+                return
+            }
+
             console.log('form submitted')
             await createCitizen({
                 variables: {
@@ -26,6 +36,7 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
             history.push('/login')
         }}>
             <div className="form-control">
+            <label htmlFor="name">Name</label>
                 <input
                     value={name}
                     type="text"
@@ -36,6 +47,7 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
                 />
             </div>
             <div className="form-control">
+            <label htmlFor="Email">Email</label>
                 <input
                     value={email}
                     type="email"
@@ -46,6 +58,7 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
                 />
             </div>
             <div className="form-control">
+            <label htmlFor="password">Password</label>
                 <input
                     value={password}
                     type="password"

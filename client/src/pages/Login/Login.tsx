@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
-import { setAccessToken, setCitizenId } from '../../context';
+import { setAccessToken, setCitizenId } from '../../helpers/context';
+import { validateStringLength } from '../../helpers/helper';
 import './login.css'
 
 const Login: React.FC = () => {
@@ -8,10 +9,17 @@ const Login: React.FC = () => {
     const [password, setPassword] = useState('');
 
     const history = useHistory()
-
+    
         return (
             <form className="auth-form" onSubmit={ async e=> {
                 e.preventDefault();
+
+                const isEmptyEmail = validateStringLength('Email', email)
+                const isEmptyPassword = validateStringLength('Password', password)
+
+                if (!isEmptyEmail || !isEmptyPassword) {
+                    return
+                }
 
                 const response = await fetch('http://localhost:4000/login', {
                     credentials:'include',
@@ -34,6 +42,7 @@ const Login: React.FC = () => {
                 }
             }}>
                 <div className="form-control">
+                <label htmlFor="email">Email</label>
                     <input
                         value={email}
                         type="email"
@@ -44,6 +53,7 @@ const Login: React.FC = () => {
                     />
                 </div>
                 <div className="form-control">
+                <label htmlFor="password">Password</label>
                     <input
                         value={password}
                         type="password"
@@ -59,12 +69,6 @@ const Login: React.FC = () => {
             </form>
         );
 }
-
-// const LoginWithRouter = withRouter(Login)
-
-// export {
-//     LoginWithRouter as Login
-// }
 
 export {
     Login

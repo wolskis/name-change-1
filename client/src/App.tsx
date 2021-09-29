@@ -2,10 +2,10 @@ import { ApolloProvider } from '@apollo/client';
 import React, { useEffect, useState } from 'react'
 import { Routes } from './Routes';
 import Spinner from './Spinner/Spinner';
-import { useClient } from './client';
+import { useClient } from './helpers/client';
 import { Router, Switch } from 'react-router'
-import { customHistory } from './history';
-import { getCitizenId, setAccessToken } from './context';
+import { customHistory } from './helpers/history';
+import { getCitizenId, setAccessToken } from './helpers/context';
 
 const App: React.FC = () => {
     const [loading, setLoading] = useState(true)

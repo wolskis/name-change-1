@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useHistory } from 'react-router-dom';
-import { getCitizenId } from '../context';
+import { getCitizenId } from '../helpers/context';
 import { useLogoutMutation } from '../generated/graphql';
 import './header.css'
 

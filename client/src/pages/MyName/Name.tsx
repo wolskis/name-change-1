@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom';
 import Backdrop from '../../Backdrop/Backdrop';
 import { GetCitizenDocument, GetCitizenQuery, useCreateNameMutation, useGetCitizenQuery } from '../../generated/graphql';
+import { validateStringLength } from '../../helpers/helper';
 import Modal from '../../Modal/Modal';
 import Spinner from '../../Spinner/Spinner';
 import { NameOverview } from './NameOverview';
@@ -26,14 +27,14 @@ const Name: React.FC<RouteComponentProps<{ id: string }>> = ({
             id: id
         }
     })
-
-    if (error) {
-        return <p>error</p>
-    }
-
     if (!data && loadingCitizen) {
         <Spinner />
     }
+
+    if (error) {
+        return <p>Error</p>
+    }
+
 
 
     const onModalCancel = () => {
@@ -41,6 +42,13 @@ const Name: React.FC<RouteComponentProps<{ id: string }>> = ({
     }
 
     const onModalConfirm = async () => {
+
+        const isEmptyName  = validateStringLength('Name', name)
+
+        if (!isEmptyName) {
+            return
+        }
+
         await createName({
             variables: {
                 nameInput: {
@@ -84,6 +92,7 @@ const Name: React.FC<RouteComponentProps<{ id: string }>> = ({
                         loading={loadingMutation}
                     >
                         <div className="form-control">
+                        <label htmlFor='name'>Name</label>
                             <input
                                 value={name}
                                 type="text"

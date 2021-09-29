@@ -1,7 +1,5 @@
 const { buildSchema } = require('graphql')
 
-//Citizen => citizen of the country
-
 module.exports = buildSchema(`
     type Citizen {
         id: ID!
@@ -53,8 +51,6 @@ module.exports = buildSchema(`
         login(email: String!, password:String!): AuthData!
         createCitizen(citizenInput: CitizenInput!): Citizen!
         createName (nameInput: NameInput!): Name!
-        deleteNames: Boolean
-        deleteCitizens: Boolean
     }
 
     schema {

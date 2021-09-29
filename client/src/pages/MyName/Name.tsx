@@ -1,29 +1,38 @@
-import React, { useContext, useState } from 'react'
-import { RouteComponentProps } from 'react-router';
+import React, { useState } from 'react'
+import { RouteComponentProps } from 'react-router-dom';
 import Backdrop from '../../Backdrop/Backdrop';
-import { useCreateNameMutation, useGetCitizenQuery } from '../../generated/graphql';
+import { GetCitizenDocument, GetCitizenQuery, useCreateNameMutation, useGetCitizenQuery } from '../../generated/graphql';
 import Modal from '../../Modal/Modal';
 import Spinner from '../../Spinner/Spinner';
 import { NameOverview } from './NameOverview';
 import { PastNames } from './PastNames';
 
 
-const Name: React.FC<RouteComponentProps> = ({ history }) => {
+const Name: React.FC<RouteComponentProps<{ id: string }>> = ({ 
+    match: {
+        params: {
+            id
+        }
+    }
+}) => {
+
     const [name, setName] = useState('');
     const [createNameForm, setCreateNameForm] = useState(false)
 
-    const [createName] = useCreateNameMutation()
+    const [createName, { loading: loadingMutation }] = useCreateNameMutation()
 
-    const { data, loading, error } = useGetCitizenQuery({variables : {
-        id: '614e8efce09be6803c4a8f84'
-    }})
-    
-    if (!data && loading) {
-        return <Spinner />
-    }
+    const { data, loading: loadingCitizen, error } = useGetCitizenQuery({
+        variables: {
+            id: id
+        }
+    })
 
     if (error) {
-        return null
+        return <p>error</p>
+    }
+
+    if (!data && loadingCitizen) {
+        <Spinner />
     }
 
 
@@ -32,54 +41,69 @@ const Name: React.FC<RouteComponentProps> = ({ history }) => {
     }
 
     const onModalConfirm = async () => {
-        const response = await createName({
+        await createName({
             variables: {
                 nameInput: {
                     name
                 }
+            },
+            update: (store, { data }) => {
+                if (!data) {
+                    return null
+                }
+                store.writeQuery<GetCitizenQuery>({
+                    query: GetCitizenDocument,
+                    data: {
+                        __typename: 'RootQuery',
+                        getCitizen: data.createName.citizen
+                    }
+                })
             }
         })
 
         setCreateNameForm(false)
-        history.push('/my-name')
     }
 
+    if (loadingMutation) {
+        return <Spinner />
+    }
 
 
     return (
         <>
-        {createNameForm && (
-            <>
-            <Backdrop />
-            <Modal
-                title='Add Name'
-                canCancel
-                canConfirm
-                onCancel={onModalCancel}
-                onConfirm={onModalConfirm}
-                buttonText='Confirm'
-            >
-                <div className="form-control">
-                    <input
-                        value={name}
-                        type="text"
-                        placeholder="name"
-                        onChange={e => {
-                            setName(e.target.value)
-                        }}
-                    />
-                </div>
-            </Modal>
-        </>
-        )}
+            {createNameForm && (
+                <>
+                    <Backdrop />
+                    <Modal
+                        title='Add Name'
+                        canCancel
+                        canConfirm
+                        onCancel={onModalCancel}
+                        onConfirm={onModalConfirm}
+                        buttonText='Confirm'
+                        loading={loadingMutation}
+                    >
+                        <div className="form-control">
+                            <input
+                                value={name}
+                                type="text"
+                                placeholder="name"
+                                onChange={e => {
+                                    setName(e.target.value)
+                                }}
+                            />
+                        </div>
+                    </Modal>
+                </>
+            )}
 
-        <NameOverview 
-            currentName={data?.getCitizen.currentName} 
-            setCreateNameForm={setCreateNameForm} 
-            pastNamesLength={data?.getCitizen.pastNames.length}
-        />
-        <PastNames pastNames={data?.getCitizen.pastNames}/>
-    </>   
+            <NameOverview
+                currentName={data?.getCitizen.currentName.name}
+                setCreateNameForm={setCreateNameForm}
+                pastNamesLength={data?.getCitizen.pastNames.length}
+            />
+            <PastNames pastNames={data?.getCitizen.pastNames} />
+        </>
     );
 }
 

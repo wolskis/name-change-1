@@ -1,18 +1,16 @@
-import moment from "moment"
-
 export { }
 const Citizen = require('../../models/CitizenModel')
 const Name = require('../../models/NameModel')
+const moment = require('moment')
 
 const { transformName, names, isNameExpiring } = require('./helper')
 
 module.exports = {
     createName: async (args: typeof Name, { req }) => {
 
-        // if (!req.isAuth) {
-        //     throw new Error('Unauthenticated!');
-        // }
-console.log(req)
+        if (!req.isAuth) {
+            throw new Error('Unauthenticated!');
+        }
         try {
             const citizen = await Citizen.findById(req.citizenId)
 
@@ -70,7 +68,8 @@ console.log(req)
     },
     expiringNames: async () => {
         try {
-            const names = await Name.find()
+
+            const names = await Name.find({ endDate: null })
 
             const availableNames = names.filter((name: typeof Name) => isNameExpiring(name.startDate)) 
 

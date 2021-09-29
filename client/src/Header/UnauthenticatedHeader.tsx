@@ -1,14 +1,10 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useLogoutMutation } from '../generated/graphql';
-import { useHistory } from 'react-router'
 import './header.css'
 
-interface IHeaderProps {
-  token?: string | null
-}
 
-const Header: React.FC<IHeaderProps> = ({ token = true }) => {
+const UnAuthenticatedHeader: React.FC<{token?: string|null}> = ({token}) => {
 
   const [logout] = useLogoutMutation()
   const history = useHistory()
@@ -20,20 +16,17 @@ const Header: React.FC<IHeaderProps> = ({ token = true }) => {
       </div>
       <div className="main-navigation__items">
         <ul>
-
           {token && <li>
-            <NavLink to="/my-name">
-              My Names
+            <NavLink to={`/my-name/${token}`}>
+              My Name
             </NavLink>
           </li>}
-          {token && (
-            <li>
-              <NavLink to="/">
-                Up Coming Names
-              </NavLink>
-            </li>
-          )}
-          {token && (
+          <li>
+            <NavLink to="/">
+              Up Coming Names
+            </NavLink>
+          </li>
+          {!token && (
             <>
               <li>
                 <NavLink to="/login">
@@ -47,14 +40,18 @@ const Header: React.FC<IHeaderProps> = ({ token = true }) => {
               </li>
             </>
           )}
-          {token && <li>
-            <button onClick={async () => {
-              await logout()
-              history.push('/')
-            }}>
-              Logout
-            </button>
-          </li>}
+          {token && (
+            <li>
+              <button onClick={async () => {
+                await logout()
+                localStorage.removeItem('citizenId')
+                localStorage.removeItem('token')
+                history.push('/login')
+              }}>
+                Logout
+              </button>
+            </li>
+          )}
         </ul>
 
       </div>
@@ -63,5 +60,5 @@ const Header: React.FC<IHeaderProps> = ({ token = true }) => {
 }
 
 export {
-  Header
+  UnAuthenticatedHeader
 }

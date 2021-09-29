@@ -57,13 +57,14 @@ module.exports = {
                 pastNames: []
             }
         } catch (err) {
+            console.log(err)
             throw err;
         }
     },
     citizens: async (_,{req}) => {
-        // if (!req.isAuth) {
-        //     throw new Error('Unauthenticated!');
-        // }
+        if (!req.isAuth) {
+            throw new Error('Unauthenticated!');
+        }
         try {
             const citizens = await Citizen.find()
             return citizens.map((citizen: typeof Citizen) => {
@@ -75,9 +76,12 @@ module.exports = {
         }
     },
     getCitizen: async (args, {req}) => {
-        // if (!req.isAuth) {
-        //     throw new Error('Unauthenticated!');
-        // }
+        if (!req.isAuth) {
+            throw new Error('Unauthenticated!');
+        }
+        if (!args.id) {
+            throw Error ('no id')
+        }
         try {
             const citizen = await Citizen.findById(args.id)
             return transformCitizen(citizen)

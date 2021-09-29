@@ -27,6 +27,13 @@ const CardItem: React.FC<ICardItemProps> = ({ name, startDate, endDate, endDateT
     );
 }
 
+const CardItemMemo = React.memo(CardItem, (prevProps, nextProps) => {
+    return prevProps.endDate === nextProps.endDate &&
+    prevProps.startDate === nextProps.startDate &&
+    prevProps.name === nextProps.name &&
+    prevProps.endDateType === nextProps.endDateType
+})
+
 export {
-    CardItem
+    CardItemMemo as CardItem
 }

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { RouteComponentProps } from 'react-router';
+import React, { useState } from 'react'
+import { RouteComponentProps } from 'react-router-dom';
 import Backdrop from '../../Backdrop/Backdrop';
-import { getAccessToken, getCitizenId } from '../../context';
 import { GetCitizenDocument, GetCitizenQuery, useCreateNameMutation, useGetCitizenQuery } from '../../generated/graphql';
 import Modal from '../../Modal/Modal';
 import Spinner from '../../Spinner/Spinner';
@@ -42,7 +41,7 @@ const Name: React.FC<RouteComponentProps<{ id: string }>> = ({
     }
 
     const onModalConfirm = async () => {
-        const response = await createName({
+        await createName({
             variables: {
                 nameInput: {
                     name
@@ -61,8 +60,6 @@ const Name: React.FC<RouteComponentProps<{ id: string }>> = ({
                 })
             }
         })
-
-        console.log(response)
 
         setCreateNameForm(false)
     }

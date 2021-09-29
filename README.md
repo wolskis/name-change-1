@@ -59,3 +59,4 @@ After you clone the project, move to respective folder for backend and client.
 ## Decisions and tradeoffs
 
 1. Currently, input validation is not done properly since the major purpose of creating this project was for me to understand the concept of a full stack project with authentication. 
+

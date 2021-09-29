@@ -1,7 +1,6 @@
-import { create } from 'domain';
 import React, { useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom';
-import { useCreateCitizenMutation, useLoginMutation } from '../../generated/graphql';
+import { useCreateCitizenMutation } from '../../generated/graphql';
 
 const Register: React.FC<RouteComponentProps> = ({ history }) => {
     const [email, setEmail] = useState('');
@@ -9,13 +8,12 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
     const [name, setName] = useState('');
 
     const [createCitizen] = useCreateCitizenMutation()
-    const [login] = useLoginMutation()
 
     return (
         <form className="auth-form" onSubmit={async e => {
             e.preventDefault();
             console.log('form submitted')
-            const response = await createCitizen({
+            await createCitizen({
                 variables: {
                     citizenInput: {
                         name,

@@ -27,7 +27,6 @@ export const login =  async (req, res) => {
     if (!citizen) {
         return res.send({ error: 'User does not exist' })
     }
-    console.log(req.body.email)
     
     const checkPassword = await bcrypt.compare(req.body.password, citizen.password)
 
@@ -39,9 +38,6 @@ export const login =  async (req, res) => {
 
     sendRefreshToken(res, createRefreshToken(citizen))
 
-    // return res.status(201).json({ citizenId: citizen.id, token})
-    //  res.cookie('token', token, {httpOnly: true, path: '/login'})
-    // return res.cookie('token',{ citizenId: citizen.id, token}, { httpOnly: true, path: "/login" })
     return res.send({ok:true, token, citizenId: citizen.id })
 }
 

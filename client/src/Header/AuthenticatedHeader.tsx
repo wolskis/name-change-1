@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { Link, NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { getCitizenId } from '../context';
 import { useLogoutMutation } from '../generated/graphql';
 import './header.css'
 
-interface IAuthenticatedHeaderProps {
-}
 
-const AuthenticatedHeader: React.FC<IAuthenticatedHeaderProps> = ({  }) => {
+const AuthenticatedHeader: React.FC = () => {
 
   const [citizenId, setCitizenId] = useState<string | null>()
-  
+  const history = useHistory()
   useEffect(() => {
     const id = getCitizenId()
     setCitizenId(id)
   }, [citizenId])
 
-  const history = useHistory()
   const [logout] = useLogoutMutation()
 
   return (

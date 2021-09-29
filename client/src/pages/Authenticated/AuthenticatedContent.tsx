@@ -1,24 +1,15 @@
 import React from 'react'
-import {  Route, Switch, withRouter } from 'react-router';
-import { BrowserRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { AuthenticatedHeader } from '../../Header/AuthenticatedHeader';
 import { Home } from '../Home/Home';
 import { Name } from '../MyName/Name';
 
-interface IAuthenticatedContentProps {
-
-}
-
-const AuthenticatedContent: React.FC<IAuthenticatedContentProps> = ({ }) => {
+const AuthenticatedContent: React.FC = () => {
     return (
         <>
-        <BrowserRouter>
         <AuthenticatedHeader  />
-        <Switch>
-            <Route path="/my-name/:id" component={withRouter(Name)} />
+            <Route path="/my-name/:id" component={Name} />
             <Route path="/" component={Home} exact/>
-            </Switch>
-        </BrowserRouter>
         </>
     );
 }

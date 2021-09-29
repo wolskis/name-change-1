@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { RouteComponentProps } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { setAccessToken, setCitizenId } from '../../context';
 import './login.css'
 
-const Login: React.FC<RouteComponentProps> = ({history}) => {
+const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const history = useHistory()
 
         return (
             <form className="auth-form" onSubmit={ async e=> {
@@ -57,6 +59,12 @@ const Login: React.FC<RouteComponentProps> = ({history}) => {
             </form>
         );
 }
+
+// const LoginWithRouter = withRouter(Login)
+
+// export {
+//     LoginWithRouter as Login
+// }
 
 export {
     Login

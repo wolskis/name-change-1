@@ -12,4 +12,6 @@ COPY . .
 
 EXPOSE 3000
 
+RUN yarn codegen
+
 CMD ["yarn", "start"]

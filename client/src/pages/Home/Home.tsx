@@ -4,11 +4,7 @@ import Spinner from '../../Spinner/Spinner'
 import { Callout } from '../Callout/Callout'
 import { Cards } from '../Cards/Cards'
 
-interface IHomeProps {
-
-}
-
-const Home: React.FC<IHomeProps> = ({ }) => {
+const Home: React.FC = () => {
 
     const { data, loading, error } = useExpiringNamesQuery()
 

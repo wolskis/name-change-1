@@ -60,3 +60,11 @@ After you clone the project, move to respective folder for backend and client.
 
 1. Currently, input validation is not done properly since the major purpose of creating this project was for me to understand the concept of a full stack project with authentication. 
 
+## Some interesting features that can be added in the future 
+
+1. Visual representation of times,citizens change their names (Can be based on gender, geographic locations, age group)
+1. Providing recommendation of names to the citizens
+1. Ability to book one name for next time use
+1. Integration with other government services when names are updated by a citizen
+1. A timer to display until if a predetermined time is set for changing the name
+1. Ability to login via social media sites for secure authentication and authorization

@@ -1,13 +1,9 @@
 import React from 'react'
-import { NavLink, useHistory } from 'react-router-dom';
-import { useLogoutMutation } from '../generated/graphql';
+import { NavLink} from 'react-router-dom';
 import './header.css'
 
 
-const UnAuthenticatedHeader: React.FC<{token?: string|null}> = ({token}) => {
-
-  const [logout] = useLogoutMutation()
-  const history = useHistory()
+const UnAuthenticatedHeader: React.FC = () => {
 
   return (
     <header className="main-navigation">
@@ -16,42 +12,21 @@ const UnAuthenticatedHeader: React.FC<{token?: string|null}> = ({token}) => {
       </div>
       <div className="main-navigation__items">
         <ul>
-          {token && <li>
-            <NavLink to={`/my-name/${token}`}>
-              My Name
-            </NavLink>
-          </li>}
           <li>
-            <NavLink to="/">
+            <NavLink exact activeClassName='selected' to="/">
               Up Coming Names
             </NavLink>
           </li>
-          {!token && (
-            <>
-              <li>
-                <NavLink to="/login">
-                  Login
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/register">
-                  Register
-                </NavLink>
-              </li>
-            </>
-          )}
-          {token && (
-            <li>
-              <button onClick={async () => {
-                await logout()
-                localStorage.removeItem('citizenId')
-                localStorage.removeItem('token')
-                history.push('/login')
-              }}>
-                Logout
-              </button>
-            </li>
-          )}
+          <li>
+            <NavLink exact activeClassName='selected' to="/login">
+              Login
+            </NavLink>
+          </li>
+          <li>
+            <NavLink exact activeClassName='selected' to="/register">
+              Register
+            </NavLink>
+          </li>
         </ul>
 
       </div>

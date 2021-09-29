@@ -4,7 +4,6 @@ import { getCitizenId } from '../helpers/context';
 import { useLogoutMutation } from '../generated/graphql';
 import './header.css'
 
-
 const AuthenticatedHeader: React.FC = () => {
 
   const [citizenId, setCitizenId] = useState<string | null>()
@@ -24,12 +23,12 @@ const AuthenticatedHeader: React.FC = () => {
       <div className="main-navigation__items">
         <ul>
           <li>
-            <NavLink to={`/my-name/${citizenId}`}>
+            <NavLink exact activeClassName='selected' to={`/my-name/${citizenId}`}>
               My Names
             </NavLink>
           </li>
           <li>
-            <NavLink to="/">
+            <NavLink exact activeClassName='selected' to="/">
               Up Coming Names
             </NavLink>
           </li>

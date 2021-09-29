@@ -47,7 +47,7 @@ After you clone the project, move to respective folder for backend and client.
 1. Run `yarn install` for both backend and client
 1. Run `yarn run dev` for backend
 
-## Copy the contents of nodemon-example and create nodemon.json with appropriate values
+##### Copy the contents of nodemon-example and create nodemon.json with appropriate values
 
 1. Run `yarn start` for client
 
@@ -56,7 +56,7 @@ After you clone the project, move to respective folder for backend and client.
 1. Run `npm install` for both backend and client
 1. Run `npm run dev` for backend
 
-## Copy the contents of nodemon-example and create nodemon.json with appropriate values
+##### Copy the contents of nodemon-example and create nodemon.json with appropriate values
 
 1. Run `npm start` for client
 

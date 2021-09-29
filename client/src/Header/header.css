@@ -57,3 +57,7 @@
     background: #fff;
     border-radius: 5px;
 }
+
+.main-navigation .selected {
+    color: white;
+}

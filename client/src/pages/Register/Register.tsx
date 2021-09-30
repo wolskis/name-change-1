@@ -18,7 +18,7 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
             const isEmptyPassword =  validateStringLength('Name', name)
             const isEmptyName = validateStringLength('Password', password)
 
-            if (!isEmptyEmail || !isEmptyPassword || isEmptyName) {
+            if (!isEmptyEmail || !isEmptyPassword || !isEmptyName) {
                 return
             }
 
@@ -32,7 +32,9 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
                     }
                 }
             })
-
+            setEmail('')
+            setPassword('')
+            setName('')
             history.push('/login')
         }}>
             <div className="form-control">

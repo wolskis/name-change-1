@@ -69,7 +69,7 @@ module.exports = {
     expiringNames: async () => {
         try {
 
-            const names = await Name.find({ endDate: null })
+            const names = await Name.find()
 
             const availableNames = names.filter((name: typeof Name) => isNameExpiring(name.startDate)) 
 

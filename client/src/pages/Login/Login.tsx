@@ -35,6 +35,9 @@ const Login: React.FC = () => {
                     alert(result.error)
                 }
 
+                setEmail('')
+                setPassword('')
+
                 if (result.ok) {
                     setAccessToken(result.token)
                     setCitizenId(result.citizenId)

@@ -42,22 +42,18 @@ After you clone the project, move to respective folder for backend and client.
 
 1. Run `docker-compose up`
 
+##### Copy the contents of nodemon-example and create nodemon.json with appropriate values
+
 ##### Yarn
 
 1. Run `yarn install` for both backend and client
 1. Run `yarn run dev` for backend
-
-##### Copy the contents of nodemon-example and create nodemon.json with appropriate values
-
 1. Run `yarn start` for client
 
 ##### NPM
 
 1. Run `npm install` for both backend and client
 1. Run `npm run dev` for backend
-
-##### Copy the contents of nodemon-example and create nodemon.json with appropriate values
-
 1. Run `npm start` for client
 
 ### For generation graphql schemas in your frontend, you will need to run `yarn codegen`

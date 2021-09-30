@@ -73,3 +73,4 @@ After you clone the project, move to respective folder for backend and client.
 
 https://user-images.githubusercontent.com/51769774/135367544-a436b156-f435-45d7-8732-6b13696b07d8.mp4
 
+![image](https://user-images.githubusercontent.com/51769774/135367625-81775147-672f-48ba-8ad1-92928d108565.png)

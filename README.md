@@ -70,3 +70,6 @@ After you clone the project, move to respective folder for backend and client.
 1. Integration with other government services when names are updated by a citizen
 1. A timer to display until if a predetermined time is set for changing the name
 1. Ability to login via social media sites for secure authentication and authorization
+
+https://user-images.githubusercontent.com/51769774/135367544-a436b156-f435-45d7-8732-6b13696b07d8.mp4
+

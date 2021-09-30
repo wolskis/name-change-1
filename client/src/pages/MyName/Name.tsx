@@ -32,10 +32,8 @@ const Name: React.FC<RouteComponentProps<{ id: string }>> = ({
     }
 
     if (error) {
-        return <p>Error</p>
+        return <div>Page Not Found</div>
     }
-
-
 
     const onModalCancel = () => {
         setCreateNameForm(false)

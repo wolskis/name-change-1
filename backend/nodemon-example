@@ -1,8 +1,10 @@
 {
     "env": {
+        "MONGO_HOST": "container name of mongo in docker-compose",
         "MONGO_USER": "Your mongo username",
         "MONGO_PASS": "Your mongo password",
         "MONGO_DB": "Your db name",
+        "MONGO_PORT": "27017",
         "PORT": "Port",
         "ACCESS_TOKEN_SECRET": "accessToken",
         "REFRESH_TOKEN_SECRET": "refreshToken"

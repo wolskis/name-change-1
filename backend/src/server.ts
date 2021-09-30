@@ -1,5 +1,3 @@
-
-export {}
 const express = require('express')
 const { graphqlHTTP } = require('express-graphql')
 const mongoose = require('mongoose')
@@ -12,6 +10,16 @@ const isAuthenticated = require('./middleware/isAuthenticated');
 const { login, refreshToken } = require("./middleware/authHelper");
 
 const app = express();
+
+const {
+    MONGO_HOST,
+    MONGO_USER,
+    MONGO_PASS,
+    MONGO_DB,
+    MONGO_PORT,
+    PORT,
+} = process.env;
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
@@ -36,10 +44,9 @@ app.use('/graphql', graphqlHTTP((req, res)=> {
 })}))
 
 mongoose.connect(
-    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.istcc.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`,
+    `mongodb://${MONGO_USER}:${MONGO_PASS}@${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB}?retryWrites=true&w=majority`
 ).then(() => {
     console.log('Connected to Mongoose successfully')
-    const PORT = process.env.PORT
     app.listen(PORT, () => {
         console.log(`Server is running on PORT ${PORT}`)
     })

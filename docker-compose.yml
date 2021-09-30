@@ -1,0 +1,46 @@
+version: "3.7"
+services: 
+  name-change-backend:
+    depends_on:
+      - mongodb
+    container_name: name-change-backend
+    image: name-change-backend
+    build: ./backend
+    ports:
+      - "4000:4000"
+    volumes:
+        - ./backend:/usr/src/app
+    networks:
+      - backend
+  mongodb:
+    image: mongo:latest
+    container_name: name-change-mongodb
+    environment: 
+      MONGO_INITDB_DATABASE: namechange
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - ./backend/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - data-volume:/data/db
+    ports:
+      - '27017:27017'
+    networks:
+      - backend
+  name-change-client:
+    container_name: name-change-client
+    image: name-change-client
+    build: ./client
+    ports:
+      - "3000:3000"
+    volumes:
+        - ./client:/usr/src/app
+    networks:
+      - frontend
+
+networks:
+  backend:
+    driver: bridge
+  frontend:
+
+volumes:
+  data-volume:

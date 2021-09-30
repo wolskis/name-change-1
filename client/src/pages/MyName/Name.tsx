@@ -49,7 +49,7 @@ const Name: React.FC<RouteComponentProps<{ id: string }>> = ({
             return
         }
 
-        await createName({
+      await createName({
             variables: {
                 nameInput: {
                     name
@@ -68,6 +68,8 @@ const Name: React.FC<RouteComponentProps<{ id: string }>> = ({
                 })
             }
         })
+
+        setName('')
 
         setCreateNameForm(false)
     }
